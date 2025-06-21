@@ -1,0 +1,91 @@
+---
+description: Code Quality Guidelines
+globs: 
+---
+# Code Quality Guidelines
+
+These rules are designed to ensure quality, clarity, and sustainability in suggestion, review, and editing processes.
+
+---
+
+## Verify Information
+- Always verify the information you provide.
+- Do not make assumptions or guesses if it's not explicitly stated.
+- In ambiguous situations, carefully analyze the context instead of asking for information.
+
+## File-by-File & Scoped Changes
+- Make changes on a file-by-file, isolated basis.
+- Changes to each file should be understandable within their own context.
+- Do not suggest changing or cleaning up unrelated code.
+
+## No Apologies or Redundant Courtesy
+- Do not apologize or provide explanations to be polite; keep the language neutral and direct.
+- Avoid unnecessary phrases like "I hope I understood correctly."
+
+## No Understanding Feedback
+- Refrain from personal comments like "As I understand it" or "I thought that."
+- Do not add commentary unless the user asks for it.
+
+##  No Whitespace or Format-Only Suggestions
+- Do not offer suggestions based solely on whitespace, line breaks, or formatting differences.
+- Formatting changes should only be made when style rules are explicitly requested.
+
+## No Summaries of Edits
+- Do not provide summaries of the changes made.
+- Do not repeat things the user can notice themselves.
+
+## No Invented Content
+- Do not generate any functions, examples, structures, or explanations that are not explicitly requested or indicated in the context.
+- Additional scenarios, edge cases, or example code should only be added if requested.
+
+## No Redundant Confirmations
+- Do not re-query information that has already been provided.
+- If it's stated in the context, do not respond with "are you sure?" or "did you mean this?".
+
+## Preserve Existing Structures
+- Preserve the existing code structure, functions, and architectural integrity.
+- Do not offer unnecessary refactoring or renaming proposals.
+
+## Single Chunk Edits
+- Present changes as a single, complete chunk, not incrementally.
+- Provide the final version directly instead of incremental suggestions or explanations.
+
+## No Implementation Checks
+- Do not ask the user to confirm code that is visible or clearly present in the context.
+- Do not ask questions like "was this already here?".
+
+##  No Unnecessary Suggestions
+- Do not offer any updates or suggestions unless a real change is needed.
+- If there are no changes, remain silent.
+
+## Provide Real File Paths
+- File references must be given with real and correct paths (placeholders like `x.md` should not be used).
+- Use references that accurately reflect the intra-project context.
+
+## No Default Context Repetition
+- Do not describe the current implementation unless the user asks for it.
+- Avoid explanations like "The current code works like this...".
+
+---
+
+## Additional Rules (Advanced)
+
+### Consistency is Key
+- Be consistent with the rest of the code. Do not create differences in style, naming, or structure.
+- Do not use different methods for the same function.
+
+### Respect Project Architecture
+- Do not violate the existing architecture (e.g., MVVM, Clean Architecture).
+- Do not make suggestions that would break inter-layer responsibilities.
+
+### Avoid Security Risks
+- Avoid suggestions that could create security risks (e.g., `eval`, `exec`, open-ended regex).
+- If necessary, make a note about security, but only if it's critical.
+
+### Don't Affect Performance Without Justification
+- Clearly state the reason for changes that will affect performance.
+- Do not make performance improvements unless the user asks for them.
+
+### Track and Respect Context
+- Do not make suggestions that contradict previous conversations or prompts.
+- Take user preferences into account to avoid context loss.

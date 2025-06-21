@@ -1,0 +1,56 @@
+---
+description: Advanced guidelines for writing clean, maintainable, secure, and professional-grade code. These principles foster collaboration, reduce technical debt, and improve overall software quality.
+globs: 
+---
+# Advanced Clean Code & Software Craftsmanship Guidelines
+
+## 1. Naming & Readability
+- **Meaningful and Unambiguous Names:** Names for variables, functions, and classes must reveal intent. They should answer *why* it exists, *what* it does, and *how* it is used. A long, descriptive name is better than a short, enigmatic one. The length of a name should correspond to the size of its scope.
+- **Constants Over Magic Values:** Replace any hard-coded, unexplained value (magic number, string, etc.) with a named constant. Group related constants and place them where they are contextually relevant (e.g., top of the file, a dedicated `Constants` class, or an `enum`).
+- **Avoid Encodings and Disinformation:** Do not encode type or scope information in names (e.g., `strName`, `m_user`, `IProduct`). Avoid names that are technically different but semantically identical (`productInfo`, `productData`).
+
+## 2. Functions & Methods
+- **Single Responsibility Principle (SRP):** A function should do one thing, do it well, and do it only. It should operate at a single level of abstraction. If a function requires comments to break down its steps, it's a signal that it should be refactored into smaller functions.
+- **Function Arguments:** Aim for zero, one, or two arguments. More than two arguments is a code smell; consider passing an object instead. Avoid boolean flags (`doThisOrThat(true)`) as they indicate the function has more than one responsibility.
+- **Avoid Side Effects (Command-Query Separation):** A function should either perform an action (Command) or return data (Query), but not both. This makes the code easier to predict, test, and reason about.
+- **Prefer Exceptions to Returning Error Codes:** Returning error codes or `null` clutters the caller's logic with conditional checks. Throwing exceptions provides a clear, separate channel for error handling.
+
+## 3. Comments & Documentation
+- **Comments Explain "Why," Not "What":** Well-written code is self-documenting and explains *what* it does. Use comments to explain the *why*—the business logic, historical context, or reasoning behind a non-obvious design choice.
+- **Avoid Bad Comments:** Do not leave commented-out code in the repository. Remove redundant comments that state the obvious (e.g., `// i is a counter`).
+- **Use for Warnings and Intent:** Good comments include `// TODO:` or `// FIXME:` markers for tracking technical debt, warnings of consequences (e.g., performance-critical sections), and public API documentation (`JSDoc`, `Docstring`, etc.).
+
+## 4. Structure & Formatting
+- **The Step-down Rule (Vertical Formatting):** Code should read like a top-down narrative. High-level concepts and functions should be at the top, with details and lower-level functions further down. Keep related functions close to each other.
+- **Consistent Formatting:** Enforce a single, automated style guide across the entire project using tools like Prettier, ESLint, or a language-specific linter/formatter. Consistency is more important than any individual preference.
+- **Group by Feature/Domain:** Organize files and directories based on features or business domains, not technical roles (e.g., group all user-related components together, rather than having separate `controllers`, `models`, and `views` folders with unrelated files).
+
+## 5. Design Principles
+- **DRY (Don't Repeat Yourself):** Every piece of knowledge must have a single, unambiguous, authoritative representation within a system. However, beware of premature or incorrect abstraction, which can be worse than duplication.
+- **Encapsulation & Law of Demeter:** Hide implementation details and expose clear, minimal interfaces. Objects should not expose their internal structure. "Talk to friends, not to strangers"—call methods on direct dependencies, not on the objects returned by them.
+- **Dependency Management:** Keep external dependencies to a minimum. Each dependency adds to the project's complexity, security risk, and maintenance overhead. Understand the cost before adding a new one.
+
+## 6. Error Handling & Robustness
+- **Provide Context with Errors:** When you throw an exception, include a descriptive message and wrap the original exception to provide a full stack trace. This is crucial for debugging.
+- **Don't Pass or Return Null:** Returning `null` forces the caller to perform null checks, leading to boilerplate and potential `NullPointerExceptions`. Consider using the Null Object pattern, Optionals (e.g., Java's `Optional`, Rust's `Option`), or throwing an exception instead.
+
+## 7. Testing
+- **FIRST Principles for Tests:** Tests should be Fast, Independent/Isolated, Repeatable, Self-Validating, and Timely/Thorough.
+- **Comprehensive Test Coverage:** Write a balanced mix of tests:
+  - **Unit Tests:** To verify individual components in isolation.
+  - **Integration Tests:** To ensure different parts of the system work together.
+  - **End-to-End (E2E) Tests:** To validate complete user flows.
+- **Test-Driven Development (TDD):** Follow the "Red-Green-Refactor" cycle. Write a failing test before writing the production code, then write just enough code to make it pass, and finally, refactor both.
+
+## 8. Quality Maintenance & Process
+- **The Boy Scout Rule:** Leave the code cleaner than you found it. Every commit should make the codebase incrementally better.
+- **Continuous Refactoring:** Refactoring is not a separate task; it's an integral part of the development process. Pay down technical debt as soon as it's identified.
+- **Peer Code Reviews:** All code should be reviewed by at least one other team member before being merged. Reviews should be constructive, focusing on principles, correctness, and readability—not just personal style.
+
+## 9. Version Control
+- **Atomic and Semantic Commits:** Each commit should represent a single logical change. Write clear, descriptive commit messages following a convention (e.g., Conventional Commits: `feat:`, `fix:`, `refactor:`).
+- **Meaningful Branch and PR/MR Descriptions:** Use clear branch names (e.g., `feat/add-user-login`). Pull/Merge Request descriptions should explain *what* the change is and *why* it was made, linking to relevant tickets or issues.
+
+## 10. Security
+- **Security is Not an Afterthought:** Build security into the development process from the beginning (DevSecOps).
+- **Sanitize All Inputs:** Never trust external data. Sanitize and validate all inputs from users, APIs, and databases to prevent injection attacks (SQLi, XSS, etc.).
